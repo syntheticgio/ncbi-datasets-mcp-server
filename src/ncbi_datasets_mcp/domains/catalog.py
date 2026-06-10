@@ -199,3 +199,92 @@ DATA_REPORT_TYPES: list[DataReportType] = [
         produced_by=[],
     ),
 ]
+
+
+_BY_KEY = {entry.key: entry for entry in DATA_REPORT_TYPES}
+
+
+def _tools_phrase(produced_by: list[str]) -> str:
+    if produced_by:
+        return "Retrieve with: " + ", ".join(produced_by)
+    return "Not yet supported by this server (see docs link)."
+
+
+def overview() -> dict:
+    """Readable overview of all NCBI Datasets data report types.
+
+    Returns a dict with a rendered ``report`` string and a structured
+    ``data_types`` list (summary-level, no field categories).
+    """
+    lines = [
+        "# NCBI Datasets data report types",
+        "",
+        (
+            "NCBI Datasets packages metadata as the following data report "
+            "schemas. Call list_data_types with a report_type for the full "
+            "field list of any one type."
+        ),
+        "",
+    ]
+    data_types = []
+    for entry in DATA_REPORT_TYPES:
+        lines.append(f"## {entry.title}  (`{entry.key}`)")
+        lines.append(entry.summary)
+        lines.append(_tools_phrase(entry.produced_by))
+        lines.append("")
+        data_types.append(
+            {
+                "key": entry.key,
+                "title": entry.title,
+                "summary": entry.summary,
+                "produced_by": entry.produced_by,
+                "docs_url": entry.docs_url,
+            }
+        )
+    return {"report": "\n".join(lines), "data_types": data_types}
+
+
+def describe(report_type: str) -> dict:
+    """Full detail for one data report type.
+
+    Returns a dict with a rendered ``report`` and a structured ``data_type``.
+    On an unknown key, returns ``{"error": ..., "available_types": [...]}``.
+    """
+    key = report_type.strip().lower()
+    entry = _BY_KEY.get(key)
+    if entry is None:
+        matches = [k for k in _BY_KEY if key and key in k]
+        hint = ""
+        if matches:
+            hint = " Did you mean: " + ", ".join(sorted(matches)) + "?"
+        return {
+            "error": f"Unknown report_type '{report_type}'.{hint}",
+            "available_types": list(_BY_KEY),
+        }
+
+    lines = [
+        f"# {entry.title}  (`{entry.key}`)",
+        "",
+        entry.summary,
+        "",
+        "## Field categories",
+    ]
+    lines += [f"- {cat}" for cat in entry.field_categories]
+    lines += [
+        "",
+        _tools_phrase(entry.produced_by),
+        "",
+        f"Schema docs: {entry.docs_url}",
+    ]
+
+    return {
+        "report": "\n".join(lines),
+        "data_type": {
+            "key": entry.key,
+            "title": entry.title,
+            "summary": entry.summary,
+            "field_categories": entry.field_categories,
+            "produced_by": entry.produced_by,
+            "docs_url": entry.docs_url,
+        },
+    }
