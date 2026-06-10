@@ -81,3 +81,23 @@ class TestDescribe:
     def test_describe_is_case_insensitive(self):
         result = catalog.describe("Genome-Assembly")
         assert result["data_type"]["key"] == "genome-assembly"
+
+
+class TestToolMappingIntegrity:
+    def test_produced_by_names_are_real_tools(self):
+        import inspect
+
+        from ncbi_datasets_mcp import server as server_mod
+
+        defined = {
+            name
+            for name, obj in inspect.getmembers(server_mod)
+            if inspect.iscoroutinefunction(obj)
+        }
+        referenced = {
+            tool
+            for entry in catalog.DATA_REPORT_TYPES
+            for tool in entry.produced_by
+        }
+        missing = referenced - defined
+        assert not missing, f"catalog references unknown tools: {missing}"
