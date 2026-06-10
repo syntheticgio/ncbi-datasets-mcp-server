@@ -1,0 +1,53 @@
+{
+  "mcpb_version": "0.1",
+  "name": "ncbi-datasets",
+  "display_name": "NCBI Datasets",
+  "version": "0.1.0",
+  "description": "Search metadata and download genomic data from NCBI Datasets — genomes, taxonomy, annotations.",
+  "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.",
+  "author": {
+    "name": "ncbi-datasets-mcp contributors",
+    "url": "https://github.com/your-org/ncbi-datasets-mcp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/ncbi-datasets-mcp"
+  },
+  "license": "MIT",
+  "keywords": ["ncbi", "genomics", "bioinformatics", "datasets", "genome"],
+  "server": {
+    "type": "python",
+    "mcp_config": {
+      "command": "uvx",
+      "args": ["ncbi-datasets-mcp"],
+      "env": {
+        "NCBI_API_KEY": "${user_config.ncbi_api_key}",
+        "NCBI_DOWNLOAD_DIR": "${user_config.ncbi_download_dir}",
+        "NCBI_AUTO_INSTALL": "true"
+      }
+    }
+  },
+  "tools_generated": true,
+  "user_config": {
+    "ncbi_api_key": {
+      "type": "string",
+      "title": "NCBI API Key",
+      "description": "Optional NCBI API key. Increases the rate limit from 3 to 10 requests/second. Get one free at https://www.ncbi.nlm.nih.gov/account/",
+      "sensitive": true,
+      "required": false
+    },
+    "ncbi_download_dir": {
+      "type": "directory",
+      "title": "Download Directory",
+      "description": "Where genome and taxonomy packages will be saved.",
+      "required": false,
+      "default": "${HOME}/Downloads/ncbi_datasets"
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "python": ">=3.10"
+    }
+  }
+}
