@@ -1,4 +1,5 @@
 # ncbi-datasets-mcp
+NOTE: This is not affiliated with NCBI or NCBI Datasets, this is a user provided tool.
 
 An MCP server that gives Claude access to [NCBI Datasets v2](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/) — search genome assembly metadata, retrieve taxonomy records, and download data packages without leaving your conversation.
 
