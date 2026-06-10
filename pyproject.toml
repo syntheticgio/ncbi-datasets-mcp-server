@@ -10,6 +10,7 @@ readme = "README.md"
 license = { file = "LICENSE" }
 requires-python = ">=3.10"
 keywords = ["mcp", "ncbi", "bioinformatics", "genomics", "datasets"]
+authors = [{ name = "John Torcivia", email = "jtorcivia@gmail.com"}]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Science/Research",

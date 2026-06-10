@@ -7,11 +7,11 @@
   "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.",
   "author": {
     "name": "ncbi-datasets-mcp contributors",
-    "url": "https://github.com/your-org/ncbi-datasets-mcp"
+    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/ncbi-datasets-mcp"
+    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp"
   },
   "license": "MIT",
   "keywords": ["ncbi", "genomics", "bioinformatics", "datasets", "genome"],
