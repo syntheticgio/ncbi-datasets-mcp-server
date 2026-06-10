@@ -5,6 +5,11 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+- `list_data_types` tool — describes the NCBI Datasets data report schema types
+  (gene, genome assembly, genome sequence, taxonomy, virus, and more), with an
+  optional `report_type` argument for per-type field detail and docs links.
+
 ## [0.1.0] — Initial release
 
 ### Added

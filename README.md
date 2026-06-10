@@ -1,13 +1,14 @@
 # ncbi-datasets-mcp
 NOTE: This is not affiliated with NCBI or NCBI Datasets, this is a user provided tool.
 
-An MCP server that gives Claude access to [NCBI Datasets v2](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/) — search genome assembly metadata, retrieve taxonomy records, and download data packages without leaving your conversation.
+An MCP server that gives Claude access to [NCBI Datasets v2](https://www.ncbi.nlm.nih.gov/datasets/docs/v2/) — discover what data NCBI Datasets offers, search genome assembly metadata, retrieve taxonomy records, and download data packages without leaving your conversation.
 
 ## Tools
 
 | Tool | Transport | Description |
 |------|-----------|-------------|
 | `ensure_cli` | — | Install the NCBI CLI tools (run once, or set `NCBI_AUTO_INSTALL=true`) |
+| `list_data_types` | — | Describe what kinds of data NCBI Datasets provides; optional per-type detail |
 | `genome_summary_by_taxon` | REST | Search genome assemblies by organism name or tax ID |
 | `genome_summary_by_accession` | REST | Fetch assembly metadata for known accessions |
 | `genome_download_by_taxon` | CLI | Download a genome package by taxon |
@@ -16,6 +17,15 @@ An MCP server that gives Claude access to [NCBI Datasets v2](https://www.ncbi.nl
 | `dataformat_genome_tsv` | CLI | Convert a genome JSONL data report to TSV |
 | `taxonomy_summary` | REST | Get lineage, rank, and names for a taxon |
 | `taxonomy_download` | CLI | Download a taxonomy package |
+
+### Discovering available data
+
+Not sure what NCBI Datasets offers? Ask "what kind of data can I get from
+datasets?" and the server's `list_data_types` tool returns a readable catalog of
+every data report type — genes, genome assemblies, genome sequences, taxonomy,
+viruses, and more — along with which tools retrieve each one. Pass a specific
+type (e.g. `genome-assembly`) for its full field list and schema documentation
+link.
 
 ## Installation
 
