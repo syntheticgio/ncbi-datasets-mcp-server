@@ -9,7 +9,11 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",  # ignore stray env vars from host process
+    )
 
     # NCBI API key — increases rate limit from 3 to 10 req/s
     ncbi_api_key: Optional[str] = None
