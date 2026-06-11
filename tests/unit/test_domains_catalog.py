@@ -2,7 +2,6 @@
 
 from ncbi_datasets_mcp.domains import catalog
 
-
 EXPECTED_KEYS = {
     "gene",
     "gene-product",
