@@ -19,6 +19,7 @@ from ncbi_datasets_mcp.cli.installer import install_cli
 from ncbi_datasets_mcp.cli.locator import locate_cli
 from ncbi_datasets_mcp.cli.runner import CLIError, CLINotFoundError, run_datasets
 from ncbi_datasets_mcp.config import settings
+from ncbi_datasets_mcp.domains import catalog as catalog_domain
 from ncbi_datasets_mcp.domains import genome as genome_domain
 from ncbi_datasets_mcp.domains import taxonomy as taxonomy_domain
 from ncbi_datasets_mcp.rest.client import (
@@ -100,6 +101,31 @@ async def ensure_cli() -> dict[str, Any]:
             "command-line-tools/download-and-install/"
         ),
     }
+
+
+# ── Data discovery ────────────────────────────────────────────────────────────
+
+@mcp.tool()
+async def list_data_types(report_type: str | None = None) -> dict[str, Any]:
+    """Describe the kinds of data NCBI Datasets can provide.
+
+    Call with no arguments for a readable overview of every NCBI Datasets
+    data report type (genes, genome assemblies, sequences, taxonomy, viruses,
+    and more), including which other tools in this server retrieve each one.
+
+    Pass a report_type (e.g. "genome-assembly", "taxonomy", "virus") to get
+    that type's full field categories and a link to its schema documentation.
+
+    Args:
+        report_type: Optional data report type key. Omit to list all types.
+                     Unknown values return the list of valid keys.
+    """
+    try:
+        if report_type is None:
+            return catalog_domain.overview()
+        return catalog_domain.describe(report_type)
+    except Exception as exc:
+        return {"error": str(exc), "report_type": report_type}
 
 
 # ── Genome summary (REST) ─────────────────────────────────────────────────────

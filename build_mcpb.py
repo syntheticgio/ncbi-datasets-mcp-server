@@ -7,19 +7,30 @@ the archive only needs the manifest (and optional icon). The Python package
 itself is fetched from PyPI by uvx at install time.
 
 Usage:
-    python scripts/build_mcpb.py [--version VERSION] [--out DIR]
+    python build_mcpb.py [--version VERSION] [--out DIR]
 
 Requires: an icon at assets/icon.png (optional but recommended for the registry)
 """
 
 import argparse
 import json
-import shutil
+import re
 import sys
 import zipfile
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent
+
+
+def _pyproject_version() -> str | None:
+    pyproject = ROOT / "pyproject.toml"
+    if not pyproject.exists():
+        return None
+    # Match `version = "x.y.z"` under [project] without pulling in a TOML parser.
+    # Reads only up to 50 lines to stay fast; the version field is always near the top.
+    text = "\n".join(pyproject.read_text().splitlines()[:50])
+    m = re.search(r'^version\s*=\s*"([^"]+)"', text, re.MULTILINE)
+    return m.group(1) if m else None
 
 
 def load_manifest() -> dict:
@@ -38,10 +49,9 @@ def sync_version(manifest: dict, version: str) -> dict:
 def build(version: str | None, out_dir: Path) -> Path:
     manifest = load_manifest()
 
-    if version:
-        manifest = sync_version(manifest, version)
-    else:
-        version = manifest.get("version", "0.0.0")
+    if not version:
+        version = _pyproject_version() or manifest.get("version", "0.0.0")
+    manifest = sync_version(manifest, version)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     bundle_path = out_dir / f"ncbi-datasets-{version}.mcpb"

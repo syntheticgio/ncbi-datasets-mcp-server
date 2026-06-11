@@ -1,22 +1,23 @@
 {
-  "mcpb_version": "0.1",
+  "manifest_version": "0.4",
   "name": "ncbi-datasets",
   "display_name": "NCBI Datasets",
-  "version": "0.1.0",
-  "description": "Search metadata and download genomic data from NCBI Datasets — genomes, taxonomy, annotations.",
-  "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.",
+  "version": "0.1.2",
+  "description": "Search metadata and download genomic data from NCBI Datasets — genomes, taxonomy, annotations. Not affiliated with NIH, NLM, or NCBI.",
+  "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.\n\nThis is an independent community tool and is not affiliated with, endorsed by, or supported by NIH, NLM, NCBI, or the NCBI Datasets team.",
   "author": {
-    "name": "ncbi-datasets-mcp contributors",
-    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp"
+    "name": "John Torcivia",
+    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp-server"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp"
+    "url": "https://github.com/syntheticgio/ncbi-datasets-mcp-server"
   },
   "license": "MIT",
   "keywords": ["ncbi", "genomics", "bioinformatics", "datasets", "genome"],
   "server": {
-    "type": "python",
+    "type": "uv",
+    "entry_point": "src/ncbi_datasets_mcp/server.py",
     "mcp_config": {
       "command": "uvx",
       "args": ["ncbi-datasets-mcp"],

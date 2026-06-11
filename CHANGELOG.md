@@ -5,6 +5,18 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.2] — 2026-06-11
+
+### Added
+- `list_data_types` tool — describes the NCBI Datasets data report schema types
+  (gene, genome assembly, genome sequence, taxonomy, virus, and more), with an
+  optional `report_type` argument for per-type field detail and docs links.
+
+### Fixed
+- `manifest.json`: renamed `mcpb_version` → `manifest_version` (spec v0.3) and
+  added required `entry_point` so the `.mcpb` bundle passes Claude Desktop
+  validation.
+
 ## [0.1.0] — Initial release
 
 ### Added
