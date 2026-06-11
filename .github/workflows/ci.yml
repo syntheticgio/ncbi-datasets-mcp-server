@@ -27,6 +27,30 @@ jobs:
       - run: pip install ruff
       - run: ruff check src/ tests/
 
+  version-check:
+    name: Version consistency (pyproject.toml == manifest.json)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compare versions
+        run: |
+          PYPROJECT=$(python3 -c "
+          import re, pathlib
+          t = pathlib.Path('pyproject.toml').read_text()
+          print(re.search(r'^version\s*=\s*\"([^\"]+)\"', t, re.M).group(1))
+          ")
+          MANIFEST=$(python3 -c "
+          import json, pathlib
+          print(json.loads(pathlib.Path('manifest.json').read_text())['version'])
+          ")
+          echo "pyproject.toml: $PYPROJECT"
+          echo "manifest.json:  $MANIFEST"
+          if [ "$PYPROJECT" != "$MANIFEST" ]; then
+            echo "ERROR: versions do not match — bump both files together"
+            exit 1
+          fi
+          echo "OK: versions match ($PYPROJECT)"
+
   unit-tests:
     name: Unit tests (Python ${{ matrix.python-version }})
     runs-on: ubuntu-latest
