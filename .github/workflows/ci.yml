@@ -100,7 +100,7 @@ jobs:
       - name: Build .mcpb
         run: |
           VERSION=${GITHUB_REF_NAME#v}
-          python scripts/build_mcpb.py --version "$VERSION" --out dist
+          python build_mcpb.py --version "$VERSION" --out dist
       - name: Upload to GitHub release
         uses: softprops/action-gh-release@v2
         with:
