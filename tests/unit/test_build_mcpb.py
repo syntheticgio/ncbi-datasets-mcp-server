@@ -5,8 +5,6 @@ import sys
 import zipfile
 from pathlib import Path
 
-import pytest
-
 # build_mcpb.py lives at the repo root, not in a package — add it to path.
 ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(ROOT))
