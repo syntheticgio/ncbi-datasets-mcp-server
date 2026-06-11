@@ -2,7 +2,7 @@
   "mcpb_version": "0.1",
   "name": "ncbi-datasets",
   "display_name": "NCBI Datasets",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Search metadata and download genomic data from NCBI Datasets — genomes, taxonomy, annotations.",
   "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.",
   "author": {
