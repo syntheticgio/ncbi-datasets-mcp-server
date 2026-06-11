@@ -7,21 +7,19 @@ the archive only needs the manifest (and optional icon). The Python package
 itself is fetched from PyPI by uvx at install time.
 
 Usage:
-    python scripts/build_mcpb.py [--version VERSION] [--out DIR]
+    python build_mcpb.py [--version VERSION] [--out DIR]
 
 Requires: an icon at assets/icon.png (optional but recommended for the registry)
 """
 
 import argparse
 import json
-import shutil
+import re
 import sys
 import zipfile
 from pathlib import Path
 
-import re
-
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent
 
 
 def _pyproject_version() -> str | None:
