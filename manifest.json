@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.3",
+  "manifest_version": "0.4",
   "name": "ncbi-datasets",
   "display_name": "NCBI Datasets",
   "version": "0.1.2",
@@ -16,7 +16,7 @@
   "license": "MIT",
   "keywords": ["ncbi", "genomics", "bioinformatics", "datasets", "genome"],
   "server": {
-    "type": "python",
+    "type": "uv",
     "entry_point": "src/ncbi_datasets_mcp/server.py",
     "mcp_config": {
       "command": "uvx",
