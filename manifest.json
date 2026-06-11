@@ -1,5 +1,5 @@
 {
-  "mcpb_version": "0.1",
+  "manifest_version": "0.3",
   "name": "ncbi-datasets",
   "display_name": "NCBI Datasets",
   "version": "0.1.2",
@@ -17,6 +17,7 @@
   "keywords": ["ncbi", "genomics", "bioinformatics", "datasets", "genome"],
   "server": {
     "type": "python",
+    "entry_point": "src/ncbi_datasets_mcp/server.py",
     "mcp_config": {
       "command": "uvx",
       "args": ["ncbi-datasets-mcp"],
