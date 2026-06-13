@@ -5,6 +5,17 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.3] — 2026-06-13
+
+### Fixed
+- Server no longer crashes on startup when the download directory is passed as
+  an unexpanded shell token (e.g. the literal `${HOME}/Downloads/ncbi_datasets`
+  some MCP hosts forward verbatim). `NCBI_DOWNLOAD_DIR` now expands `${VAR}`,
+  `$VAR`, and `~`, falls back to the platform Downloads folder when blank or
+  unexpandable, and warns instead of crashing if the directory can't be created.
+- `manifest.json`: dropped the `${HOME}`-based default for the Download
+  Directory; the server now supplies the correct per-platform default.
+
 ## [0.1.2] — 2026-06-11
 
 ### Added
