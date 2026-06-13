@@ -2,7 +2,7 @@
   "manifest_version": "0.4",
   "name": "ncbi-datasets",
   "display_name": "NCBI Datasets",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Search metadata and download genomic data from NCBI Datasets — genomes, taxonomy, annotations. Not affiliated with NIH, NLM, or NCBI.",
   "long_description": "Provides Claude with access to NCBI Datasets v2 for querying and downloading genome assemblies, taxonomy records, and associated annotation files (GFF3, GBFF, protein/RNA FASTA). On first use, the required NCBI CLI tools are installed automatically.\n\nThis is an independent community tool and is not affiliated with, endorsed by, or supported by NIH, NLM, NCBI, or the NCBI Datasets team.",
   "author": {
@@ -40,9 +40,8 @@
     "ncbi_download_dir": {
       "type": "directory",
       "title": "Download Directory",
-      "description": "Where genome and taxonomy packages will be saved.",
-      "required": false,
-      "default": "${HOME}/Downloads/ncbi_datasets"
+      "description": "Where genome and taxonomy packages will be saved. Defaults to your Downloads folder if left blank.",
+      "required": false
     }
   },
   "compatibility": {
