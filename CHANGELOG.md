@@ -5,6 +5,14 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.1.4] — 2026-06-13
+
+### Fixed
+- `manifest.json`: changed server `type` from `"uv"` to `"python"` so Claude
+  Desktop respects `mcp_config.command` (`uvx`) rather than overriding it with
+  the bare `uv` binary, which caused `error: unrecognized subcommand` on every
+  startup.
+
 ## [0.1.3] — 2026-06-13
 
 ### Fixed
